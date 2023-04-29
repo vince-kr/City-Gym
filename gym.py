@@ -3,8 +3,8 @@ import actions
 import elements
 
 actions = {
-    "Become a member": actions.enlist_new_member,
     "Calcuate cost": actions.calculate_cost,
+    "Become a member": actions.enlist_new_member,
 }
 
 window = elements.build_gui_window(actions)
@@ -15,7 +15,8 @@ while True:
     if event == sg.WIN_CLOSED:
         break
 
-    action = actions[event]
-    action(values)
+    if event in actions:
+        action = actions[event]
+        sg.Popup(action(values), title="City Gym")
 
 window.close()
